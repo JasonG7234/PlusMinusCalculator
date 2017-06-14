@@ -34,6 +34,10 @@ public class PlusMinusCalculator {
 		roster[6] = p7;
 		Player p8 = new Player (13, "Matt Bullock", 0);
 		roster[7] = p8;
+		Player p9 = new Player (0, "Souf Mensah", 0);
+		roster[8] = p9;
+		Player p10 = new Player (15, "Jake Dadika", 0);
+		roster[9] = p10;
 		
 		
 		
