@@ -5,11 +5,13 @@ package defaultpackage;
 		int number;
 		String name;
 		int plusminus;
+		boolean hasPlayed;
 		
-		public Player(int number, String name, int plusminus) {
+		public Player(int number, String name, int plusminus, boolean hasPlayed) {
 			this.number = number;
 			this.name = name;
 			this.plusminus = plusminus;
+			this.hasPlayed = hasPlayed;
 		}
 		
 	} 
