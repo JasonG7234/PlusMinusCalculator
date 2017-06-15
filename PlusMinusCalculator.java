@@ -18,25 +18,25 @@ public class PlusMinusCalculator {
 		int sizeOfRoster = scanner.nextInt();
 		Player[] roster = new Player[sizeOfRoster];
 		
-		Player p1 = new Player(3, "Corey Sanders", 0);
+		Player p1 = new Player(3, "Corey Sanders", 0, false);
 		roster[0] = p1;
-		Player p2 = new Player(2, "Shaquille Doorson", 0);
+		Player p2 = new Player(2, "Shaquille Doorson", 0, false);
 		roster[1] = p2;
-		Player p3 = new Player(5, "Mike Williams", 0);
+		Player p3 = new Player(5, "Mike Williams", 0, false);
 		roster[2] = p3;
-		Player p4 = new Player(21, "Candido Sa", 0);
+		Player p4 = new Player(21, "Candido Sa", 0, false);
 		roster[3] = p4;
-		Player p5 = new Player(33, "Deshawn Freeman", 0);
+		Player p5 = new Player(33, "Deshawn Freeman", 0, false);
 		roster[4] = p5;
-		Player p6 = new Player(11, "Eugene Omoruyi", 0);
+		Player p6 = new Player(11, "Eugene Omoruyi", 0, false);
 		roster[5] = p6;
-		Player p7 = new Player(35, "Issa Thiam", 0);
+		Player p7 = new Player(35, "Issa Thiam", 0, false);
 		roster[6] = p7;
-		Player p8 = new Player (13, "Matt Bullock", 0);
+		Player p8 = new Player (13, "Matt Bullock", 0, false);
 		roster[7] = p8;
-		Player p9 = new Player (0, "Souf Mensah", 0);
+		Player p9 = new Player (0, "Souf Mensah", 0, false);
 		roster[8] = p9;
-		Player p10 = new Player (15, "Jake Dadika", 0);
+		Player p10 = new Player (15, "Jake Dadika", 0, false);
 		roster[9] = p10;
 		
 		
@@ -122,6 +122,7 @@ public class PlusMinusCalculator {
 					currentPlayers = cur.unit;
 					// Represent substitution
 					currentPlayers[i] = roster[k];
+					roster[k].hasPlayed = true;
 					Lineup newLineup = new Lineup(currentPlayers, 0, null);
 					cur.next = newLineup;
 					cur = cur.next;
