@@ -74,6 +74,7 @@ public class PlusMinusCalculator {
 			if (action.equalsIgnoreCase("s")) {
 				//Substitution
 				int i = 0;
+				int k = 0;
 				while (input) {
 					//Sub out
 					System.out.println("Enter the number of the player being subbed out: ");
@@ -96,7 +97,7 @@ public class PlusMinusCalculator {
 					System.out.println("Enter the number of the player being subbed in: ");
 					int subin = scanner.nextInt();
 					//Check to make sure player is on roster
-					for (int k = 0; k < 13; k++) {
+					for (k = 0; k < 13; k++) {
 						if (roster[k].number == subin) {
 							input2 = false;
 							break;
@@ -117,18 +118,22 @@ public class PlusMinusCalculator {
 						}
 					}
 					
-					Player[] currentLineup = new Player[5];
+					Player[] currentPlayers = new Player[5];
+					currentPlayers = cur.unit;
+					// Represent substitution
+					currentPlayers[i] = roster[k];
+					Lineup newLineup = new Lineup(currentPlayers, 0, null);
+					cur.next = newLineup;
+					cur = cur.next;
+					
+					/* Future updates -> I would like to give the user the
+					 * option to make multiple substitutions at once, if
+					 * let's say a coach subs out all five guys. 
+					 * OR
+					 * Save the starters as a lineup, and not create a new
+					 * lineup at the start of the second half or end of game. 
+					 */
 				}
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 			} else if (action.equalsIgnoreCase("p")) {
 				//Points scored
 				System.out.println("Enter how many points were scored. (If they were scored for the other team, input a negative number.)");
@@ -152,7 +157,16 @@ public class PlusMinusCalculator {
 
 	private static void calculatePlusMinuses(Lineup starters) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Calculating best lineups...);
+		TimeUnit.SECONDS.sleep(5);
+		System.out.println("Overall plus minuses: ");
+         	for (int a = 0; a < sizeOfRoster; a++) {
+             	    if (roster[a].plusminus > 0) {
+                 	System.out.println(roster[a].name + " -> +" + roster[a].plusminus)
+		    } else {
+                	System.out.println(roster[a].name + " -> " + roster[a].plusminus);
+             	    }
+         	}
 	}
 
 }
