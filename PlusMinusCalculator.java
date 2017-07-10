@@ -158,12 +158,12 @@ public class PlusMinusCalculator {
 
 	private static void calculatePlusMinuses(Lineup starters) {
 		// TODO Auto-generated method stub
-		System.out.println("Calculating best lineups...);
+		System.out.println("Calculating best lineups...");
 		TimeUnit.SECONDS.sleep(5);
 		System.out.println("Overall plus minuses: ");
          	for (int a = 0; a < sizeOfRoster; a++) {
              	    if (roster[a].plusminus > 0) {
-                 	System.out.println(roster[a].name + " -> +" + roster[a].plusminus)
+                 	System.out.println(roster[a].name + " -> +" + roster[a].plusminus);
 		    } else {
                 	System.out.println(roster[a].name + " -> " + roster[a].plusminus);
              	    }
