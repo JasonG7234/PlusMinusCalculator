@@ -188,6 +188,11 @@ public class PlusMinusCalculator {
                 	System.out.println(roster[a].name + " -> " + roster[a].plusminus);
              	    }
          	}
+		System.out.println("Best 5 man units: ");
+            	while (starters!=null) {
+                	System.out.println(starters.unit[0].name + "/" + starters.unit[1].name + "/" + starters.unit[2].name + "/" + starters.unit[3].name + "/" + starters.unit[4].name + " -> " + starters.plusminus);
+                	starters = starters.next;
+            	}
 	}
 
 }
