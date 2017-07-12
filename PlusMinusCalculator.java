@@ -43,21 +43,39 @@ public class PlusMinusCalculator {
 		
 		//Step 2 -> Create starting lineup
 		Player[] startingLineup = new Player[5];
-		boolean input = true;
+		//inproperInput means the user did not enter a correct starter,
+		//numberInLineup means tells the console to output the correct ERROR statement depending on criteria
+		boolean inproperInput;
+		boolean numberInLineup;
 		for (int i = 0; i<5; i++) {
+		    inproperInput = true;
+		    numberInLineup = true;
 			while (input) {
 				System.out.println("Enter number of starter: ");
 				int num = scanner.nextInt();
+				//Check if player is on roster
 				for (int j = 0; j < sizeOfRoster; j++) {
 					if (num == roster[j].number) {
-						startingLineup[i] = roster[j];
-						input = false; 
+					    startingLineup[i] = roster[j];
+					    inproperInput = false; 
+					    //Check if player is already in starting lineup
+					    for (int k = i-1; k >= 0; k--) {
+					        if (startingLineup[k].number == num) {
+					            //If player is already in starting lineup...
+					            startingLineup[i] = null;
+					            //This boolean is responsible for outputting the right ERROR Statement
+					            numberInLineup = false;
+					            System.out.println("ERROR: Number already in starting lineup. Try again.");
+					            inproperInput = true;
+					            break;
+					        }
+					    }
 						break;
 					}
 				}
-				if (startingLineup[i] == null) {
-					System.out.println("ERROR: Number not found on roster. Try again.");
-				}
+				if (startingLineup[i] == null && numberInLineup) {
+				    System.out.println("ERROR: Number not found on roster. Try again.");
+			    }
 			}
 		}
 		System.out.println("Starters entered successfully.");
@@ -146,7 +164,7 @@ public class PlusMinusCalculator {
 			} else if (action.equalsIgnoreCase("q")) {
 				//Exit loop
 				System.out.println("Plus minuses are being calculated.");
-				calculatePlusMinuses(starters);
+				calculatePlusMinuses(roster, sizeOfRoster, starters);
 				gameInProgress = false;
 			} else {
 				//Improper input
@@ -156,10 +174,12 @@ public class PlusMinusCalculator {
 		
 	}
 
-	private static void calculatePlusMinuses(Lineup starters) {
+	private static void calculatePlusMinuses(Player[] roster, int sizeOfRoster, Lineup starters) {
 		// TODO Auto-generated method stub
 		System.out.println("Calculating best lineups...");
+		try {
 		TimeUnit.SECONDS.sleep(5);
+		} catch (InterruptedException e) {}
 		System.out.println("Overall plus minuses: ");
          	for (int a = 0; a < sizeOfRoster; a++) {
              	    if (roster[a].plusminus > 0) {
