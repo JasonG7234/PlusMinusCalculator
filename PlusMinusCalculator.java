@@ -7,7 +7,7 @@ public class PlusMinusCalculator {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		
+		Lineup starters = null; //Head node;
 		//Step 1 -> Define all players 
 		//Step 2 -> Insert starting lineup
 		//Step 3 -> Enter while loop and monitor all lineups and subs
@@ -43,6 +43,7 @@ public class PlusMinusCalculator {
 		
 		//Step 2 -> Create starting lineup
 		Player[] startingLineup = new Player[5];
+		starters = new Lineup(startingLineup, 0, null); //Head node;
 		//inproperInput means the user did not enter a correct starter,
 		//numberInLineup means tells the console to output the correct ERROR statement depending on criteria
 		boolean inproperInput;
@@ -50,7 +51,7 @@ public class PlusMinusCalculator {
 		for (int i = 0; i<5; i++) {
 		    inproperInput = true;
 		    numberInLineup = true;
-			while (input) {
+			while (inproperInput) {
 				System.out.println("Enter number of starter: ");
 				int num = scanner.nextInt();
 				//Check if player is on roster
@@ -81,11 +82,12 @@ public class PlusMinusCalculator {
 		System.out.println("Starters entered successfully.");
 		System.out.println();
 		
-		Lineup starters = new Lineup(startingLineup, 0, null);
-		Lineup cur = starters;
+		Lineup cur = new Lineup(startingLineup, 0, null);
+		cur = starters;
 		boolean gameInProgress = true;
-		input = true;
+		boolean input = true;
 		while (gameInProgress) {
+		    input = true;
 			System.out.println("Type s for substitution, p for points scored, or q for quit.");
 			String action = scanner.next();
 			
@@ -135,24 +137,24 @@ public class PlusMinusCalculator {
 							}
 						}
 					}
-					
-					Player[] currentPlayers = new Player[5];
-					currentPlayers = cur.unit;
-					// Represent substitution
-					currentPlayers[i] = roster[k];
-					roster[k].hasPlayed = true;
-					Lineup newLineup = new Lineup(currentPlayers, 0, null);
-					cur.next = newLineup;
-					cur = cur.next;
-					
-					/* Future updates -> I would like to give the user the
-					 * option to make multiple substitutions at once, if
-					 * let's say a coach subs out all five guys. 
-					 * OR
-					 * Save the starters as a lineup, and not create a new
-					 * lineup at the start of the second half or end of game. 
-					 */
 				}
+				
+				Lineup newLineup = new Lineup(cur.unit, 0, null);
+				cur.next = newLineup;
+				cur = cur.next;
+				// Represent substitution
+				cur.unit[i] = roster[k];
+				roster[k].hasPlayed = true;
+				
+				/* Future updates -> I would like to give the user the
+				* option to make multiple substitutions at once, if
+				* let's say a coach subs out all five guys. 
+				* AND/OR
+				* Save the starters as a lineup, and not create a new
+				* lineup at the start of the second half or end of game. 
+		        */
+					
+					
 			} else if (action.equalsIgnoreCase("p")) {
 				//Points scored
 				System.out.println("Enter how many points were scored. (If they were scored for the other team, input a negative number.)");
@@ -170,16 +172,19 @@ public class PlusMinusCalculator {
 				//Improper input
 				System.out.println("ERROR: Incorrect input. Try again");
 			}
+			
 		}
 		
 	}
 
 	private static void calculatePlusMinuses(Player[] roster, int sizeOfRoster, Lineup starters) {
-		// TODO Auto-generated method stub
 		System.out.println("Calculating best lineups...");
 		try {
-		TimeUnit.SECONDS.sleep(5);
+		TimeUnit.SECONDS.sleep(3);
 		} catch (InterruptedException e) {}
+		System.out.println("");
+		System.out.println(" -------------------------------------- ");
+		System.out.println("");
 		System.out.println("Overall plus minuses: ");
          	for (int a = 0; a < sizeOfRoster; a++) {
              	    if (roster[a].plusminus > 0) {
@@ -188,6 +193,10 @@ public class PlusMinusCalculator {
                 	System.out.println(roster[a].name + " -> " + roster[a].plusminus);
              	    }
          	}
+        
+        System.out.println("");
+        System.out.println(" -------------------------------------- ");
+        System.out.println("");
 		System.out.println("Best 5 man units: ");
             	while (starters!=null) {
                 	System.out.println(starters.unit[0].name + "/" + starters.unit[1].name + "/" + starters.unit[2].name + "/" + starters.unit[3].name + "/" + starters.unit[4].name + " -> " + starters.plusminus);
