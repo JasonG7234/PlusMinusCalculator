@@ -145,15 +145,6 @@ public class PlusMinusCalculator {
 				// Represent substitution
 				cur.unit[i] = roster[k];
 				roster[k].hasPlayed = true;
-				
-				/* Future updates -> I would like to give the user the
-				* option to make multiple substitutions at once, if
-				* let's say a coach subs out all five guys. 
-				* AND/OR
-				* Save the starters as a lineup, and not create a new
-				* lineup at the start of the second half or end of game. 
-		        */
-					
 					
 			} else if (action.equalsIgnoreCase("p")) {
 				//Points scored
