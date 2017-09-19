@@ -186,7 +186,7 @@ public class PlusMinusCalculator {
          	}
         
         System.out.println("");
-        System.out.println(" -------------------------------------- ");
+        System.out.println(" ---------------- LINEUPS ---------------------- ");
         System.out.println("");
 		System.out.println("Best 5 man units: ");
             	while (starters!=null) {
